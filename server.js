@@ -26,7 +26,13 @@ app.use(express.static("./public"));
 // MongoDB Configuration configuration (Change this URL to your own DB)
 Promise = require('bluebird');
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/SodaApp");
+
+if (PORT === 3000) {
+  mongoose.connect("mongodb://localhost/SodaApp");
+} else {
+  mongoose.connect("mongodb://heroku_hss0ztzs:qhstocl1qta3nibst3l8gabqor@ds131340.mlab.com:31340/heroku_hss0ztzs");
+}
+
 var db = mongoose.connection;
 
 db.on("error", function(err) {
